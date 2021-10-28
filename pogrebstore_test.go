@@ -16,7 +16,6 @@ package pogrebstore_test
 
 import (
 	"flag"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -28,7 +27,7 @@ import (
 var keepOutput = flag.Bool("keep", false, "Keep test output after running")
 
 func TestStore(t *testing.T) {
-	dir, err := ioutil.TempDir("", "pogrebtest")
+	dir, err := os.MkdirTemp("", "pogrebtest")
 	if err != nil {
 		t.Fatalf("Creating temp directory: %v", err)
 	}
