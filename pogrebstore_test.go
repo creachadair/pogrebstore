@@ -15,6 +15,7 @@
 package pogrebstore_test
 
 import (
+	"context"
 	"flag"
 	"os"
 	"path/filepath"
@@ -36,8 +37,9 @@ func TestStore(t *testing.T) {
 	if !*keepOutput {
 		defer os.RemoveAll(dir) // best effort cleanup
 	}
+	url := "//" + path + "?sync=5s&compact=15s"
 
-	s, err := pogrebstore.Open(path, nil)
+	s, err := pogrebstore.Opener(context.Background(), url)
 	if err != nil {
 		t.Fatalf("Creating store at %q: %v", path, err)
 	}

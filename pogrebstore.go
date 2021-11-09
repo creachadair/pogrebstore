@@ -19,7 +19,11 @@ package pogrebstore
 import (
 	"context"
 	"errors"
+	"fmt"
+	"net/url"
+	"path/filepath"
 	"sort"
+	"time"
 
 	"github.com/akrylysov/pogreb"
 	"github.com/creachadair/ffs/blob"
@@ -28,12 +32,40 @@ import (
 // Store implements the blob.Store interface using a pogreb database.
 type Store struct{ db *pogreb.DB }
 
-// Opener constructs a filestore from an address comprising a path, for use
-// with the store package. If addr has the form name@path, the name is used as
-// the bucket label.
+// Opener constructs a filestore from an address comprising a URL, for use with
+// the store package. The host and path identify the database directory. The
+// following optional query parameters are understood:
+//
+//   sync    : interval between automatic syncs (duration; default 10s)
+//   compact : interval between automatic compactions (duration; default 1m)
+//
 func Opener(_ context.Context, addr string) (blob.Store, error) {
-	// TODO: Parse other options out of the address.
-	return Open(addr, nil)
+	u, err := url.Parse(addr)
+	if err != nil {
+		return nil, err
+	}
+	opts := &Options{
+		DBOptions: &pogreb.Options{
+			BackgroundSyncInterval:       10 * time.Second,
+			BackgroundCompactionInterval: 1 * time.Minute,
+		},
+	}
+	dirPath := filepath.Join(u.Host, filepath.FromSlash(u.Path))
+	if s := u.Query().Get("sync"); s != "" {
+		d, err := time.ParseDuration(s)
+		if err != nil {
+			return nil, fmt.Errorf("invalid sync interval: %v", err)
+		}
+		opts.DBOptions.BackgroundSyncInterval = d
+	}
+	if s := u.Query().Get("compact"); s != "" {
+		d, err := time.ParseDuration(s)
+		if err != nil {
+			return nil, fmt.Errorf("invalid compact interval: %v", err)
+		}
+		opts.DBOptions.BackgroundCompactionInterval = d
+	}
+	return Open(dirPath, opts)
 }
 
 // Open creates a Store by opening the pogreb database specified by path.
