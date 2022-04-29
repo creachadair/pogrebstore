@@ -1,6 +1,6 @@
 module github.com/creachadair/pogrebstore
 
-go 1.17
+go 1.18
 
 require (
 	github.com/akrylysov/pogreb v0.10.1
