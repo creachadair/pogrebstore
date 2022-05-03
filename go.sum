@@ -1,6 +1,6 @@
 github.com/akrylysov/pogreb v0.10.1 h1:FqlR8VR7uCbJdfUob916tPM+idpKgeESDXOA1K0DK4w=
 github.com/akrylysov/pogreb v0.10.1/go.mod h1:pNs6QmpQ1UlTJKDezuRWmaqkgUE2TuU0YTWyqJZ7+lI=
-github.com/creachadair/ffs v0.0.0-20220426235939-589f835c0a18 h1:Dh63wjhwc4T2470ORELiCD3lKXgurs+vc5gDel55bbs=
-github.com/creachadair/ffs v0.0.0-20220426235939-589f835c0a18/go.mod h1:ottLToKvJuqMagZbm4zTcMOZEhlydZ3AHqPGrO+Uobk=
+github.com/creachadair/ffs v0.0.0-20220503004911-c9d4af679599 h1:P31DvpeoxZSLv+TP32EdMOcTzSQ9UvMvxoR92z1gFFQ=
+github.com/creachadair/ffs v0.0.0-20220503004911-c9d4af679599/go.mod h1:YEupMTtEtUHyozI4Ii8RwoQtHbGbHp0DQGNMCAvDscA=
 github.com/google/go-cmp v0.5.8 h1:e6P7q2lk1O+qJJb4BtCQXlK8vWEO8V1ZeuEdJNOqZyg=
 github.com/google/go-cmp v0.5.8/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
