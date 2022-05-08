@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/akrylysov/pogreb v0.10.1
-	github.com/creachadair/ffs v0.0.0-20220504173048-35625b420eff
+	github.com/creachadair/ffs v0.0.0-20220508072602-745ceccc5502
 )
 
 require github.com/google/go-cmp v0.5.8 // indirect
