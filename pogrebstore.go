@@ -36,9 +36,8 @@ type Store struct{ db *pogreb.DB }
 // the store package. The host and path identify the database directory. The
 // following optional query parameters are understood:
 //
-//   sync    : interval between automatic syncs (duration; default 10s)
-//   compact : interval between automatic compactions (duration; default 1m)
-//
+//	sync    : interval between automatic syncs (duration; default 10s)
+//	compact : interval between automatic compactions (duration; default 1m)
 func Opener(_ context.Context, addr string) (blob.Store, error) {
 	u, err := url.Parse(addr)
 	if err != nil {
