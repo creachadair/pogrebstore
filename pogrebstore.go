@@ -107,9 +107,7 @@ func (s *Store) dbGet(key string) ([]byte, error) {
 	return s.db.Get(bkey)
 }
 
-// Put implements part of blob.Store. A successful Put linearizes to the point
-// at which the rename of the write temporary succeeds; a Put that fails due to
-// an existing key linearizes to the point when the key path stat succeeds.
+// Put implements part of blob.Store.
 func (s *Store) Put(_ context.Context, opts blob.PutOptions) error {
 	bkey := []byte(opts.Key)
 	ok, err := s.db.Has(bkey)
