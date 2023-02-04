@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/akrylysov/pogreb v0.10.1
-	github.com/creachadair/ffs v0.0.0-20230129190020-edf9315ecc3b
+	github.com/creachadair/ffs v0.0.0-20230204022207-569f8f4cdd9e
 )
 
 require (
