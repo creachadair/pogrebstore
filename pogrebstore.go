@@ -119,15 +119,6 @@ func (s *Store) Put(_ context.Context, opts blob.PutOptions) error {
 	return s.db.Put(bkey, opts.Data)
 }
 
-// Size implements part of blob.Store.
-func (s *Store) Size(_ context.Context, key string) (int64, error) {
-	data, err := s.dbGet(key)
-	if err != nil {
-		return 0, err
-	}
-	return int64(len(data)), nil
-}
-
 // Delete implements part of blob.Store.
 func (s *Store) Delete(_ context.Context, key string) error {
 	bkey := []byte(key)
