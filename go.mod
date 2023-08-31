@@ -1,6 +1,8 @@
 module github.com/creachadair/pogrebstore
 
-go 1.20
+go 1.21
+
+toolchain go1.21.0
 
 require (
 	github.com/akrylysov/pogreb v0.10.1
@@ -8,6 +10,6 @@ require (
 )
 
 require (
-	github.com/creachadair/mds v0.1.1 // indirect
+	github.com/creachadair/mds v0.2.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 )
