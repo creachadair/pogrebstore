@@ -1,8 +1,8 @@
 github.com/akrylysov/pogreb v0.10.2 h1:e6PxmeyEhWyi2AKOBIJzAEi4HkiC+lKyCocRGlnDi78=
 github.com/akrylysov/pogreb v0.10.2/go.mod h1:pNs6QmpQ1UlTJKDezuRWmaqkgUE2TuU0YTWyqJZ7+lI=
-github.com/creachadair/ffs v0.0.3 h1:YTlpKVlfgLha8vjEjur/PTmFL6oslEvCZdum+mGIjiI=
-github.com/creachadair/ffs v0.0.3/go.mod h1:ltShFsDe+G9tP6LhNtMBIu41mF/qEz3HP62Dmqm+Zzo=
-github.com/creachadair/mds v0.5.1 h1:x0CzsB0SGxrgWdRFPcBd6UnNxu5Azpc1/Beh5hgK2mo=
-github.com/creachadair/mds v0.5.1/go.mod h1:4vrFYUzTXMJpMBU+OA292I6IUxKWCCfZkgXg+/kBZMo=
+github.com/creachadair/ffs v0.1.1 h1:sZXRw95NqcOMhdMFrSGkzE1RZNhf4xUgegxcrPu59As=
+github.com/creachadair/ffs v0.1.1/go.mod h1:1sBBNDHv4Zvqo51DeFx1o65GDYjaZPlhqD9zBD/86nI=
+github.com/creachadair/mds v0.7.0 h1:7QoYqiPl18C0h7CLq9z9/qUH5Vr62V9677yJZHGLoQM=
+github.com/creachadair/mds v0.7.0/go.mod h1:4vrFYUzTXMJpMBU+OA292I6IUxKWCCfZkgXg+/kBZMo=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
