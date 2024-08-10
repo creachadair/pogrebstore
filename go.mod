@@ -8,6 +8,6 @@ require (
 )
 
 require (
-	github.com/creachadair/mds v0.15.3 // indirect
+	github.com/creachadair/mds v0.16.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 )
