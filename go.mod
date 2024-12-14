@@ -6,7 +6,7 @@ toolchain go1.23.1
 
 require (
 	github.com/akrylysov/pogreb v0.10.2
-	github.com/creachadair/ffs v0.6.9
+	github.com/creachadair/ffs v0.7.0
 )
 
 require (

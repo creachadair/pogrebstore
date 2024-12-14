@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package pogrebstore implements the blob.Store interface using pogreb.
-// See https://github.com/akrylysov/pogreb.
+// Package pogrebstore implements the [blob.KV] interface using [pogreb].
+//
+// [pogreb]: https://github.com/akrylysov/pogreb
 package pogrebstore
 
 import (
@@ -29,8 +30,8 @@ import (
 	"github.com/creachadair/ffs/blob"
 )
 
-// Store implements the blob.Store interface using a pogreb database.
-type Store struct{ db *pogreb.DB }
+// KV implements the [blob.KV] interface using a pogreb database.
+type KV struct{ db *pogreb.DB }
 
 // Opener constructs a filestore from an address comprising a URL, for use with
 // the store package. The host and path identify the database directory. The
@@ -38,7 +39,7 @@ type Store struct{ db *pogreb.DB }
 //
 //	sync    : interval between automatic syncs (duration; default 10s)
 //	compact : interval between automatic compactions (duration; default 1m)
-func Opener(_ context.Context, addr string) (blob.Store, error) {
+func Opener(_ context.Context, addr string) (blob.KV, error) {
 	u, err := url.Parse(addr)
 	if err != nil {
 		return nil, err
@@ -67,13 +68,13 @@ func Opener(_ context.Context, addr string) (blob.Store, error) {
 	return Open(dirPath, opts)
 }
 
-// Open creates a Store by opening the pogreb database specified by path.
-func Open(path string, opts *Options) (*Store, error) {
+// Open creates a [KV] by opening the pogreb database specified by path.
+func Open(path string, opts *Options) (*KV, error) {
 	db, err := pogreb.Open(path, opts.dbOptions())
 	if err != nil {
 		return nil, err
 	}
-	return &Store{db: db}, nil
+	return &KV{db: db}, nil
 }
 
 // Options provides options for opening a pogreb database.
@@ -89,15 +90,15 @@ func (o *Options) dbOptions() *pogreb.Options {
 	return o.DBOptions
 }
 
-// Close implements part of the blob.Store interface. It closes the underlying
+// Close implements part of the [blob.KV] interface. It closes the underlying
 // database instance and reports its result.
-func (s *Store) Close(_ context.Context) error { return s.db.Close() }
+func (s *KV) Close(_ context.Context) error { return s.db.Close() }
 
-// Get implements part of blob.Store.
-func (s *Store) Get(_ context.Context, key string) ([]byte, error) { return s.dbGet(key) }
+// Get implements part of [blob.KV].
+func (s *KV) Get(_ context.Context, key string) ([]byte, error) { return s.dbGet(key) }
 
 // dbGet fetches the data for the specified key.
-func (s *Store) dbGet(key string) ([]byte, error) {
+func (s *KV) dbGet(key string) ([]byte, error) {
 	bkey := []byte(key)
 	if ok, err := s.db.Has(bkey); err != nil {
 		return nil, err
@@ -107,8 +108,8 @@ func (s *Store) dbGet(key string) ([]byte, error) {
 	return s.db.Get(bkey)
 }
 
-// Put implements part of blob.Store.
-func (s *Store) Put(_ context.Context, opts blob.PutOptions) error {
+// Put implements part of [blob.KV].
+func (s *KV) Put(_ context.Context, opts blob.PutOptions) error {
 	bkey := []byte(opts.Key)
 	ok, err := s.db.Has(bkey)
 	if err != nil {
@@ -119,8 +120,8 @@ func (s *Store) Put(_ context.Context, opts blob.PutOptions) error {
 	return s.db.Put(bkey, opts.Data)
 }
 
-// Delete implements part of blob.Store.
-func (s *Store) Delete(_ context.Context, key string) error {
+// Delete implements part of [blob.KV].
+func (s *KV) Delete(_ context.Context, key string) error {
 	bkey := []byte(key)
 	if ok, err := s.db.Has(bkey); err != nil {
 		return err
@@ -130,10 +131,10 @@ func (s *Store) Delete(_ context.Context, key string) error {
 	return s.db.Delete(bkey)
 }
 
-// List implements part of blob.Store. Note that the pogreb database does not
+// List implements part of [blob.KV]. Note that the pogreb database does not
 // iterate keys in a specified order, so a full scan is require, and all keys
 // at or after start must be brought into memory and sorted.
-func (s *Store) List(_ context.Context, start string, f func(string) error) error {
+func (s *KV) List(_ context.Context, start string, f func(string) error) error {
 	// The database only supports complete scans, and moreover does not deliver
 	// keys in lexicographic order.
 	it := s.db.Items()
@@ -164,5 +165,5 @@ func (s *Store) List(_ context.Context, start string, f func(string) error) erro
 	return nil
 }
 
-// Len implements part of blob.Store.
-func (s *Store) Len(ctx context.Context) (int64, error) { return int64(s.db.Count()), nil }
+// Len implements part of [blob.KV].
+func (s *KV) Len(ctx context.Context) (int64, error) { return int64(s.db.Count()), nil }
